@@ -9,7 +9,7 @@ const MenuItem = ({ item }) => {
         alt={image}
       />
       <div>
-        <h3 className="uppercase">{name}----------</h3>
+        <h3 className="uppercase">{name}______________</h3>
         <p>{recipe}</p>
         <p className="text-yellow-500">${price}</p>
       </div>
