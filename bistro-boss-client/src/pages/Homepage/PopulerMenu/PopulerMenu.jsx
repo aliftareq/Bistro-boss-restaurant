@@ -23,6 +23,9 @@ const PopulerMenu = () => {
           <MenuItem key={item._id} item={item}></MenuItem>
         ))}
       </div>
+      <button className="btn btn-outline border border-b-4 mt-4">
+        View full menu
+      </button>
     </section>
   );
 };
