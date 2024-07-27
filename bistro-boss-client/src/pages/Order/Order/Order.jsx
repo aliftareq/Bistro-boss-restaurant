@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const Order = () => {
-  const categories = ["salad", "pizza", "dessert", "soup", "drinks"];
+  const categories = ["salad", "pizza", "dessert", "soups", "drinks"];
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
@@ -38,13 +38,13 @@ const Order = () => {
           <OrderTab items={salad}></OrderTab>
         </TabPanel>
         <TabPanel>
-          <OrderTab items={desserts}></OrderTab>
+          <OrderTab items={pizza}></OrderTab>
         </TabPanel>
         <TabPanel>
           <OrderTab items={soup}></OrderTab>
         </TabPanel>
         <TabPanel>
-          <OrderTab items={pizza}></OrderTab>
+          <OrderTab items={desserts}></OrderTab>
         </TabPanel>
         <TabPanel>
           <OrderTab items={drinks}></OrderTab>
