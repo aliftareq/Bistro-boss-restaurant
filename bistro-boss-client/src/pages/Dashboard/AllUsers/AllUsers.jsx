@@ -13,7 +13,21 @@ const AllUsers = () => {
     },
   });
 
-  const handleMakeAdmin = (user) => {};
+  const handleMakeAdmin = (user) => {
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} has been assigned as Admin Successfully`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
   const handleDeleteUser = (user) => {
     Swal.fire({
@@ -42,9 +56,8 @@ const AllUsers = () => {
   return (
     <div>
       <div className="flex justify-evenly">
-        <h2 className="text-6xl">All User</h2>
-        <h2 className="text-6xl">Total User : {users.length}</h2>
-        <button className="btn btn-primary">Pay</button>
+        <h2 className="text-4xl">All User</h2>
+        <h2 className="text-4xl">Total User : {users.length}</h2>
       </div>
       <div className="overflow-x-auto">
         <table className="table w-full">
@@ -66,12 +79,16 @@ const AllUsers = () => {
                 <td>{user?.name}</td>
                 <td>{user?.email}</td>
                 <td>
-                  <button
-                    onClick={() => handleMakeAdmin(user)}
-                    className="btn btn-lg bg-orange-500"
-                  >
-                    <FaUsers className="text-white text-xl"></FaUsers>
-                  </button>
+                  {user.role === "admin" ? (
+                    "Admin"
+                  ) : (
+                    <button
+                      onClick={() => handleMakeAdmin(user)}
+                      className="btn btn-lg bg-orange-500"
+                    >
+                      <FaUsers className="text-white text-xl"></FaUsers>
+                    </button>
+                  )}
                 </td>
                 <td>
                   <button
