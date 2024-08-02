@@ -19,6 +19,7 @@ const Dashboard = () => {
 
   // get isAdmin value from database
   const [isAdmin] = useAdmin();
+  console.log(isAdmin, "isAdmin");
   return (
     <div className="flex">
       {/* sideNavbar */}

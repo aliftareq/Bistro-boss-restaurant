@@ -72,7 +72,7 @@ async function run() {
             res.send(result)
         })
 
-        app.get('/user/admin/:email', varifyToken, async (req, res) => {
+        app.get('/users/admin/:email', varifyToken, async (req, res) => {
             const email = req.params.email
             if (email !== req.decoded.email) {
                 return res.status(403).send({ message: 'forbidden access' })
@@ -123,6 +123,12 @@ async function run() {
         //menu apis 
         app.get('/menu', async (req, res) => {
             const result = await menuCollection.find().toArray()
+            res.send(result)
+        })
+
+        app.post('/menu', varifyToken, varifyAdmin, async (req, res) => {
+            const menuItem = req.body
+            const result = await menuCollection.insertOne(menuItem)
             res.send(result)
         })
 
