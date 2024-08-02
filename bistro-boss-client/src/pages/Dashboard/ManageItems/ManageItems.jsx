@@ -3,17 +3,16 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useMenu from "../../../Hooks/useMenu";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-// import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
-  //   const { refetch } = useQuery();
-  const [menu] = useMenu();
+  const [menu, refetch] = useMenu();
   const axiosSecure = useAxiosSecure();
 
-  const handleUpdateItem = (id) => {
-    console.log("alkdsl", id);
+  const handleUpdateItem = (item) => {
+    console.log("alkdsl", item);
   };
-  const handleDelete = (id) => {
+  const handleDelete = (item) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -24,11 +23,12 @@ const ManageItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/carts/${id}`).then((res) => {
+        axiosSecure.delete(`/menu/${item._id}`).then((res) => {
+          console.log(res.data);
           if (res.data.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
-              text: "Your item has been removed.",
+              text: `${item.name} has been removed.`,
               icon: "success",
             });
             refetch();
@@ -76,16 +76,18 @@ const ManageItems = () => {
                   <td>{item.name}</td>
                   <td>${item.price}</td>
                   <th>
-                    <button
-                      onClick={() => handleUpdateItem(item._id)}
-                      className="btn btn-md bg-orange-500"
-                    >
-                      <FaEdit className="text-white text-xs"></FaEdit>
-                    </button>
+                    <Link to={`/dashboard/updateItems/${item._id}`}>
+                      <button
+                        onClick={() => handleUpdateItem(item)}
+                        className="btn btn-md bg-orange-500"
+                      >
+                        <FaEdit className="text-white text-xs"></FaEdit>
+                      </button>
+                    </Link>
                   </th>
                   <th>
                     <button
-                      onClick={() => handleDelete(item._id)}
+                      onClick={() => handleDelete(item)}
                       className="btn btn-ghost btn-lg"
                     >
                       <FaTrashAlt className="text-red-600"></FaTrashAlt>
