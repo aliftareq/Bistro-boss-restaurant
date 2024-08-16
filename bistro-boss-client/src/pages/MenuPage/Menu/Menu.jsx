@@ -15,7 +15,7 @@ const Menu = () => {
   const soup = menu.filter((item) => item.category === "soup");
   const salad = menu.filter((item) => item.category === "salad");
   const pizza = menu.filter((item) => item.category === "pizza");
-  const offered = menu.filter((item) => item.category === "offered");
+  const popular = menu.filter((item) => item.category === "popular");
   return (
     <div>
       <Helmet>
@@ -28,7 +28,7 @@ const Menu = () => {
         heading={"Today's offer"}
         subHeading={"Don't Miss"}
       ></SectionTitle>
-      <MenuCategory items={offered}></MenuCategory>
+      <MenuCategory items={popular}></MenuCategory>
       {/* dessert menu Items */}
       <MenuCategory
         items={desserts}
