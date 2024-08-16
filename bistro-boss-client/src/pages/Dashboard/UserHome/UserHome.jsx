@@ -6,7 +6,11 @@ const UserHome = () => {
     <div>
       <h2 className="text-3xl">
         <span>Hi, Welcome </span>
-        {user?.displayName ? user?.displayName : "back"}
+        {user?.displayName ? (
+          <span className="font-bold">{user?.displayName}</span>
+        ) : (
+          "back"
+        )}
       </h2>
     </div>
   );
